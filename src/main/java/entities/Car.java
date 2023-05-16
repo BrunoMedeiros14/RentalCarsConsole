@@ -5,7 +5,7 @@ import enums.Color;
 
 public class Car {
 
-  private int pk_carId;
+  private int carId;
   private Brand brand;
   private Color color;
   private Integer year;
@@ -13,10 +13,15 @@ public class Car {
   private String factoryName;
   private int fk_keyOwnerId;
 
-  public Car() {
-  }
+  public Car() {}
 
-  public Car(Brand brand, Integer year, Color color, Double price, String factoryName) {
+  public Car(
+    Brand brand,
+    Integer year,
+    Color color,
+    Double price,
+    String factoryName
+  ) {
     this.brand = brand;
     this.year = year;
     this.color = color;
@@ -24,12 +29,12 @@ public class Car {
     this.factoryName = factoryName;
   }
 
-  public int getPk_carId() {
-    return pk_carId;
+  public int getCarId() {
+    return carId;
   }
 
-  public void setPk_carId(int pk_carId) {
-    this.pk_carId = pk_carId;
+  public void setCarId(int carId) {
+    this.carId = carId;
   }
 
   public Brand getBrand() {
@@ -80,4 +85,21 @@ public class Car {
     this.fk_keyOwnerId = fk_keyOwnerId;
   }
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + carId;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    Car other = (Car) obj;
+    if (carId != other.carId) return false;
+    return true;
+  }
 }
