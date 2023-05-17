@@ -85,7 +85,7 @@ public class OwnerDAO {
     return owners;
   }
 
-  public Integer updateUser(Owner owner) {
+  public Integer updateOwner(Owner owner) {
     String sql =
       """
       UPDATE tbl_owner
@@ -110,7 +110,7 @@ public class OwnerDAO {
     return -1;
   }
 
-  public Integer delete(Integer id) {
+  public Integer deleteOwner(Integer id) {
     String sql = """
       DELETE FROM tbl_owner WHERE pk_owner_id = ?""";
 
