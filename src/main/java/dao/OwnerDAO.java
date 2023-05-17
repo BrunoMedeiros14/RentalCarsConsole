@@ -89,17 +89,18 @@ public class OwnerDAO {
     String sql =
       """
       UPDATE tbl_owner
-      SET name='?',
-      cpf='?',
-      age='?',
-      gender='?' 
+      SET name=?,
+      cpf=?,
+      age=?,
+      gender=? 
       WHERE pk_owner_id = ?;
       """;
+    System.out.println(owner.getOwnerId());
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
       stm.setString(1, owner.getName());
-      stm.setInt(2, owner.getAge());
-      stm.setString(3, owner.getCpf());
+      stm.setString(2, owner.getCpf());
+      stm.setInt(3, owner.getAge());
       stm.setString(4, owner.getGender().toString());
       stm.setInt(5, owner.getOwnerId());
       return stm.executeUpdate();
