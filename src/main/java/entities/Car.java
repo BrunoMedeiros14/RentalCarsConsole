@@ -11,7 +11,7 @@ public class Car {
   private Integer year;
   private Double price;
   private String factoryName;
-  private int fk_keyOwnerId;
+  private Owner owner;
 
   public Car() {}
 
@@ -77,12 +77,16 @@ public class Car {
     this.factoryName = factoryName;
   }
 
-  public int getFk_keyOwnerId() {
-    return fk_keyOwnerId;
+  public Owner getOwner() {
+    return owner;
   }
 
-  public void setFk_keyOwnerId(int fk_keyOwnerId) {
-    this.fk_keyOwnerId = fk_keyOwnerId;
+  public void setOwner(Owner owner) {
+    this.owner = owner;
+  }
+
+  public Integer getOwnerId() {
+    return owner.getOwnerId();
   }
 
   @Override
@@ -101,5 +105,26 @@ public class Car {
     Car other = (Car) obj;
     if (carId != other.carId) return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "Car [carId=" +
+      carId +
+      ", brand=" +
+      brand +
+      ", color=" +
+      color +
+      ", year=" +
+      year +
+      ", price=" +
+      price +
+      ", factoryName=" +
+      factoryName +
+      ", owner=" +
+      owner.getName() +
+      "]"
+    );
   }
 }
