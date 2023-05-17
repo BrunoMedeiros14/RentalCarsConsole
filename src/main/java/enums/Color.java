@@ -6,5 +6,18 @@ public enum Color {
   Red,
   Orange,
   Blue,
-  Cian,
+  Silver,
+  Gray,
+  Green,
+  Yellow,
+  Cian;
+
+  public static Color fromValue(String value) {
+    for (Color color : Color.values()) {
+      if (color.toString().equals(value)) {
+        return color;
+      }
+    }
+    throw new IllegalArgumentException("Invalid status value: " + value);
+  }
 }
