@@ -7,75 +7,69 @@ public class SqliteSeed {
 
   public static void seedSqlite() throws SQLException {
     String[] sql = {
-      "PRAGMA foreign_keys = ON;",
       """
-      CREATE TABLE IF NOT EXISTS `tbl_owner` (
-        `pk_owner_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-        `name` TEXT NOT NULL,
-        `cpf` TEXT NOT NULL UNIQUE,
-        `age` INTEGER,
-        `gender` TEXT
+      CREATE TABLE IF NOT EXISTS tbl_owner (
+        pk_owner_id INTEGER   NOT NULL PRIMARY KEY AUTOINCREMENT,
+        name        TEXT      NOT NULL,
+        cpf         CHAR (11) NOT NULL UNIQUE,
+        age         INTEGER   NOT NULL,
+        gender      TEXT      DEFAULT NULL
       );
-    """,
+      """,
       """
-      CREATE TABLE IF NOT EXISTS `tbl_car` (
-        `pk_car_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-        `manufacture_year` INTEGER NOT NULL,
-        `price` REAL NOT NULL,
-        `color` TEXT NOT NULL,
-        `brand` TEXT NOT NULL,
-        `factory_name` TEXT NOT NULL,
-        `fk_key_owner_id` INTEGER,
-        FOREIGN KEY (`fk_key_owner_id`) REFERENCES `tbl_owner` (`pk_owner_id`)
+      CREATE TABLE IF NOT EXISTS tbl_car (
+        pk_car_id        INTEGER       NOT NULL PRIMARY KEY AUTOINCREMENT,
+        manufacture_year INTEGER       NOT NULL,
+        price            FLOAT (10, 2) NOT NULL,
+        color            TEXT          NOT NULL,
+        brand            TEXT          NOT NULL,
+        factory_name     TEXT          NOT NULL,
+        fk_key_owner_id  INTEGER       DEFAULT NULL,
+        FOREIGN KEY (fk_key_owner_id) 
+        REFERENCES tbl_owner (pk_owner_id) ON DELETE RESTRICT
       );      
-    """,
+      """,
       """
       INSERT INTO `tbl_owner` (`pk_owner_id`, `name`, `cpf`, `age`, `gender`) VALUES
-      (1, 'Robert Johnson', '11111111111', 40, 'Male'),
-      (2, 'Emily Davis', '22222222222', 28, 'Male'),
-      (3, 'Michael Wilson', '33333333333', 35, 'Male'),
-      (4, 'Sophia Martinez', '44444444444', 32, 'Male'),
-      (5, 'David Anderson', '55555555555', 45, 'Male'),
-      (6, 'Olivia Taylor', '66666666666', 27, 'Male'),
-      (7, 'James Thomas', '77777777777', 39, 'Male'),
-      (8, 'Ava Garcia', '88888888888', 31, 'Male'),
-      (9, 'Daniel Brown', '99999999999', 37, 'Male'),
-      (10, 'Mia Johnson', '12345678901', 29, 'Male'),
-      (11, 'Alexander Davis', '98765432109', 33, 'Male'),
-      (12, 'Emma Wilson', '87654321098', 30, 'Male'),
-      (13, 'Benjamin Martin', '76543210987', 41, 'Male'),
-      (14, 'Isabella Anderson', '65432109876', 34, 'Male'),
-      (15, 'William Taylor', '54321098765', 42, 'Male'),
-      (16, 'Sophia Garcia', '43210987654', 36, 'Male'),
-      (17, 'Joseph Brown', '32109876543', 43, 'Male'),
-      (18, 'Abigail Johnson', '21098765432', 38, 'Male'),
-      (20, 'Emily Wilson', '09876543210', 26, 'Female'),
-      (21, 'Bruno', '12332112309', 22, 'Male'),
-      (33, 'Bruno', '12332112302', 22, 'Male'),
-      (42, 'Bruno', '12332112303', 22, 'Male');        
-    """,
+      (1, 'John Doe', '12345678901', 30, 'Male'),
+      (2, 'Jane Smith', '23456789012', 25, 'Female'),
+      (3, 'Michael Johnson', '34567890123', 40, 'Male'),
+      (4, 'Emily Davis', '45678901234', 35, 'Female'),
+      (5, 'David Brown', '56789012345', 28, 'Male'),
+      (6, 'Sarah Wilson', '67890123456', 32, 'Female'),
+      (7, 'Robert Taylor', '78901234567', 45, 'Male'),
+      (8, 'Olivia Martinez', '89012345678', 27, 'Female'),
+      (9, 'William Anderson', '90123456789', 33, 'Male'),
+      (10, 'Sophia Thomas', '01234567890', 29, 'Female');        
+      """,
       """
       INSERT INTO `tbl_car` (`pk_car_id`, `manufacture_year`, `price`, `color`, `brand`, `factory_name`, `fk_key_owner_id`) VALUES
-      (1, 2018, 22000.00, 'Silver', 'Ford', 'Ford Factory', 2),
-      (2, 2020, 28000.00, 'Black', 'Chevrolet', 'Chevrolet Factory', 3),
-      (3, 2017, 18000.00, 'White', 'Nissan', 'Nissan Factory', 4),
-      (4, 2019, 32000.00, 'Red', 'Volkswagen', 'VW Factory', 5),
-      (5, 2016, 25000.00, 'Blue', 'Hyundai', 'Hyundai Factory', 6),
-      (6, 2022, 35000.00, 'Gray', 'BMW', 'BMW Factory', 7),
-      (7, 2015, 20000.00, 'Green', 'Kia', 'Kia Factory', 8),
-      (8, 2021, 40000.00, 'Yellow', 'Audi', 'Audi Factory', 9),
-      (9, 2014, 18000.00, 'Silver', 'Mazda', 'Mazda Factory', 10),
-      (10, 2020, 38000.00, 'Black', 'Mercedes-Benz', 'MB Factory', 11),
-      (11, 2013, 15000.00, 'White', 'Toyota', 'Toyota Factory', 12),
-      (12, 2018, 27000.00, 'Red', 'Honda', 'Honda Factory', 13),
-      (13, 2012, 13000.00, 'Blue', 'Volvo', 'Volvo Factory', 14),
-      (14, 2023, 42000.00, 'Silver', 'Jaguar', 'Jaguar Factory', 15),
-      (15, 2011, 12000.00, 'Black', 'Subaru', 'Subaru Factory', 16),
-      (16, 2019, 34000.00, 'White', 'Lexus', 'Lexus Factory', 17),
-      (17, 2010, 11000.00, 'Red', 'Mitsubishi', 'Mitsubishi Factory', 18),
-      (18, 2017, 26000.00, 'Blue', 'Land Rover', 'LR Factory', 20),
-      (19, 2009, 10000.00, 'Gray', 'Peugeot', 'Peugeot Factory', 21);            
-    """,
+      (1, 2018, 15000.00, 'White', 'Honda', 'Honda Factory', 1),
+      (2, 2020, 25000.00, 'Black', 'Ford', 'Ford Factory', 2),
+      (3, 2019, 20000.00, 'Red', 'Hyundai', 'Hyundai Factory', 3),
+      (4, 2021, 30000.00, 'Orange', 'Volkswagen', 'VW Factory', 4),
+      (5, 2020, 22000.00, 'Blue', 'Chevrolet', 'Chevy Factory', 5),
+      (6, 2017, 18000.00, 'Silver', 'Audi', 'Audi Factory', 6),
+      (7, 2018, 15000.00, 'Gray', 'Mazda', 'Mazda Factory', 7),
+      (8, 2022, 35000.00, 'Green', 'Toyota', 'Toyota Factory', 8),
+      (9, 2019, 20000.00, 'Yellow', 'Volvo', 'Volvo Factory', 9),
+      (10, 2020, 25000.00, 'Cian', 'Jaguar', 'Jaguar Factory', 10),
+      (11, 2021, 30000.00, 'White', 'Mitsubishi', 'Mitsubishi Factory', 1),
+      (12, 2020, 22000.00, 'Black', 'Lexus', 'Lexus Factory', 2),
+      (13, 2017, 18000.00, 'Red', 'Nissan', 'Nissan Factory', 3),
+      (14, 2018, 15000.00, 'Orange', 'Kia', 'Kia Factory', 4),
+      (15, 2019, 20000.00, 'Blue', 'Subaru', 'Subaru Factory', 5),
+      (16, 2022, 35000.00, 'Silver', 'Fiat', 'Fiat Factory', 6),
+      (17, 2019, 20000.00, 'Gray', 'Honda', 'Honda Factory', 7),
+      (18, 2020, 25000.00, 'Green', 'Ford', 'Ford Factory', 8),
+      (19, 2021, 30000.00, 'Yellow', 'Hyundai', 'Hyundai Factory', 9),
+      (20, 2022, 35000.00, 'Cian', 'Volkswagen', 'VW Factory', 10),
+      (21, 2019, 20000.00, 'White', 'Chevrolet', 'Chevy Factory', 1),
+      (22, 2020, 25000.00, 'Black', 'Audi', 'Audi Factory', 2),
+      (23, 2021, 30000.00, 'Red', 'Mazda', 'Mazda Factory', 3),
+      (24, 2017, 18000.00, 'Orange', 'Toyota', 'Toyota Factory', 4),
+      (25, 2018, 15000.00, 'Blue', 'Volvo', 'Volvo Factory', 5);            
+      """,
     };
 
     SqlConnection server = new SqlConnection();
