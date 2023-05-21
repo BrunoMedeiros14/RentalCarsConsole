@@ -13,12 +13,11 @@ import utils.SqlConnection;
 public class CarDAO {
 
   public Integer createCar(Car car) {
-    String sql =
-      """
-      INSERT INTO tbl_car 
-      (brand, color, manufacture_year, price, factory_name, fk_key_owner_id)
-      VALUES (?,?,?,?,?,?)
-      """;
+    String sql = """
+        INSERT INTO tbl_car
+        (brand, color, manufacture_year, price, factory_name, fk_key_owner_id)
+        VALUES (?,?,?,?,?,?)
+        """;
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
       stm.setString(1, car.getBrand().toString());
@@ -34,12 +33,40 @@ public class CarDAO {
     return -1;
   }
 
+  public Car getCarById(Integer id) {
+    String sql = """
+        SELECT * FROM `tbl_car` WHERE `pk_car_id` = ?;
+        """;
+    Car car = new Car();
+
+    try (SqlConnection conn = new SqlConnection()) {
+      PreparedStatement stm = conn.connect().prepareStatement(sql);
+      stm.setInt(1, id);
+
+      ResultSet resultSet = stm.executeQuery();
+      while (resultSet.next()) {
+        Integer ownerId = resultSet.getInt("fk_key_owner_id");
+        car.setCarId(id);
+        car.setBrand(Brand.fromValue(resultSet.getString("brand")));
+        car.setColor(Color.fromValue(resultSet.getString("color")));
+        car.setFactoryName(resultSet.getString("factory_name"));
+        car.setOwner(new OwnerDAO().getOwnerById(ownerId));
+        car.setPrice(resultSet.getDouble("price"));
+        car.setYear(resultSet.getInt("manufacture_year"));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return car;
+
+  }
+
   public Set<Car> getAllCars() {
     Set<Car> cars = new HashSet<>();
 
     String sql = """
-      SELECT * FROM `tbl_car`;
-      """;
+        SELECT * FROM `tbl_car`;
+        """;
 
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
@@ -64,5 +91,48 @@ public class CarDAO {
     }
 
     return cars;
+  }
+
+  public Integer updateCar(Car car) {
+    String sql = """
+        UPDATE tbl_car
+        SET manufacture_year=?,
+        price=?,
+        color=?,
+        brand=?,
+        factory_name=?,
+        fk_key_owner_id=?
+        WHERE pk_car_id = ?;
+        """;
+
+    try (SqlConnection conn = new SqlConnection()) {
+      PreparedStatement stm = conn.connect().prepareStatement(sql);
+      stm.setInt(1, car.getYear());
+      stm.setDouble(2, car.getPrice());
+      stm.setString(3, car.getColor().toString());
+      stm.setString(4, car.getBrand().toString());
+      stm.setString(5, car.getFactoryName());
+      stm.setInt(6, car.getOwnerId());
+      stm.setInt(7, car.getCarId());
+      return stm.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return -1;
+  }
+
+  public Integer deleteCar(Integer id) {
+    String sql = """
+        DELETE FROM tbl_car WHERE pk_car_id = ?
+        """;
+
+    try (SqlConnection conn = new SqlConnection()) {
+      PreparedStatement stm = conn.connect().prepareStatement(sql);
+      stm.setInt(1, id);
+      return stm.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return -1;
   }
 }

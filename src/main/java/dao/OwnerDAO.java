@@ -12,12 +12,11 @@ import utils.SqlConnection;
 public class OwnerDAO {
 
   public Integer createOwner(Owner owner) {
-    String sql =
-      """
-      INSERT INTO tbl_owner 
-      (name, age, cpf, gender)
-      VALUES (?,?,?,?)
-      """;
+    String sql = """
+        INSERT INTO tbl_owner
+        (name, age, cpf, gender)
+        VALUES (?,?,?,?)
+        """;
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
       stm.setString(1, owner.getName());
@@ -32,10 +31,9 @@ public class OwnerDAO {
   }
 
   public Owner getOwnerById(Integer id) {
-    String sql =
-      """
-      SELECT * FROM `tbl_owner` WHERE `pk_owner_id` = ?;
-      """;
+    String sql = """
+        SELECT * FROM `tbl_owner` WHERE `pk_owner_id` = ?;
+        """;
     Owner owner = new Owner();
 
     try (SqlConnection conn = new SqlConnection()) {
@@ -60,8 +58,8 @@ public class OwnerDAO {
     Set<Owner> owners = new HashSet<>();
 
     String sql = """
-      SELECT * FROM `tbl_owner`;
-      """;
+        SELECT * FROM `tbl_owner`;
+        """;
 
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
@@ -86,16 +84,15 @@ public class OwnerDAO {
   }
 
   public Integer updateOwner(Owner owner) {
-    String sql =
-      """
-      UPDATE tbl_owner
-      SET name=?,
-      cpf=?,
-      age=?,
-      gender=? 
-      WHERE pk_owner_id = ?;
-      """;
-    System.out.println(owner.getOwnerId());
+    String sql = """
+        UPDATE tbl_owner
+        SET name=?,
+        cpf=?,
+        age=?,
+        gender=?
+        WHERE pk_owner_id = ?;
+        """;
+
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
       stm.setString(1, owner.getName());
@@ -112,7 +109,7 @@ public class OwnerDAO {
 
   public Integer deleteOwner(Integer id) {
     String sql = """
-      DELETE FROM tbl_owner WHERE pk_owner_id = ?""";
+        DELETE FROM tbl_owner WHERE pk_owner_id = ?""";
 
     try (SqlConnection conn = new SqlConnection()) {
       PreparedStatement stm = conn.connect().prepareStatement(sql);
