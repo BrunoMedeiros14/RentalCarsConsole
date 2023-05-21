@@ -2,6 +2,7 @@ package views;
 
 import utils.Finals;
 import utils.MenuTreatment;
+import utils.SqliteSeed;
 
 public class Menu {
 
@@ -9,7 +10,7 @@ public class Menu {
     Integer action = -1;
     while (action != 0) {
       System.out.println(Finals.CLEAN + Finals.HOME_MENU);
-      action = MenuTreatment.itemsTreatment(4);
+      action = MenuTreatment.itemsTreatment(5);
 
       Read actionMenu = new Read();
 
@@ -29,6 +30,9 @@ public class Menu {
         case 4:
           actionMenu.setCrud("delete");
           actionMenu.readItems();
+          break;
+        case 5:
+          SqliteSeed.seedSqlite();
           break;
       }
     }

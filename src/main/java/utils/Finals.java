@@ -9,27 +9,25 @@ public class Finals {
   public static final String CLEAN = "\033[H\033[2J";
 
   public static final String RESET = "\u001B[0m";
-  public static final String HOME_MENU =
-    """
-    Welcome to the Medeiros Car station!
-    What do you want to do?
-    1 - Consult
-    2 - Register
-    3 - Update
-    4 - Delete
-    0 - Exit""";
-  public static final String ACTION_MENU =
-    """
-    You want to do this with:
-    1 - Car
-    2 - Owner
-    0 - Return""";
-  public static final String TYPE_MENU =
-    """
-    You want to do this by:
-    1 - ID
-    2 - Get all
-    0 - Return""";
+  public static final String HOME_MENU = """
+      Welcome to the Medeiros Car station!
+      What do you want to do?
+      1 - Consult
+      2 - Register
+      3 - Update
+      4 - Delete
+      Dev (5 - Seed Sqlite Data)
+      0 - Exit""";
+  public static final String ACTION_MENU = """
+      You want to do this with:
+      1 - Car
+      2 - Owner
+      0 - Return""";
+  public static final String TYPE_MENU = """
+      You want to do this by:
+      1 - ID
+      2 - Get all
+      0 - Return""";
 
   // Regular Colors
   public static final String BLACK = "\033[0;30m"; // BLACK
