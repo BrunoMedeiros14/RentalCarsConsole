@@ -4,9 +4,8 @@ import java.sql.Connection;
 
 public class SqliteSeed {
 
-  public static void seedSqlite() {
-    String[] sql = {
-        """
+    public static void seedSqlite() {
+        String[] sql = {"""
             CREATE TABLE IF NOT EXISTS tbl_owner (
               pk_owner_id INTEGER   NOT NULL PRIMARY KEY AUTOINCREMENT,
               name        TEXT      NOT NULL,
@@ -14,8 +13,7 @@ public class SqliteSeed {
               age         INTEGER   NOT NULL,
               gender      TEXT      DEFAULT NULL
             );
-            """,
-        """
+            """, """
             CREATE TABLE IF NOT EXISTS tbl_car (
               pk_car_id        INTEGER       NOT NULL PRIMARY KEY AUTOINCREMENT,
               manufacture_year INTEGER       NOT NULL,
@@ -27,8 +25,7 @@ public class SqliteSeed {
               FOREIGN KEY (fk_key_owner_id)
               REFERENCES tbl_owner (pk_owner_id) ON DELETE RESTRICT
             );
-            """,
-        """
+            """, """
             INSERT INTO `tbl_owner` (`pk_owner_id`, `name`, `cpf`, `age`, `gender`) VALUES
             (1, 'John Doe', '12345678901', 30, 'Male'),
             (2, 'Jane Smith', '23456789012', 25, 'Female'),
@@ -40,8 +37,7 @@ public class SqliteSeed {
             (8, 'Olivia Martinez', '89012345678', 27, 'Female'),
             (9, 'William Anderson', '90123456789', 33, 'Male'),
             (10, 'Sophia Thomas', '01234567890', 29, 'Female');
-            """,
-        """
+            """, """
             INSERT INTO `tbl_car` (`pk_car_id`, `manufacture_year`, `price`, `color`, `brand`, `factory_name`, `fk_key_owner_id`) VALUES
             (1, 2018, 15000.00, 'White', 'Honda', 'Honda Factory', 1),
             (2, 2020, 25000.00, 'Black', 'Ford', 'Ford Factory', 2),
@@ -68,18 +64,18 @@ public class SqliteSeed {
             (23, 2021, 30000.00, 'Red', 'Mazda', 'Mazda Factory', 3),
             (24, 2017, 18000.00, 'Orange', 'Toyota', 'Toyota Factory', 4),
             (25, 2018, 15000.00, 'Blue', 'Volvo', 'Volvo Factory', 5);
-            """,
-    };
+            """,};
 
-    try (SqlConnection server = new SqlConnection()) {
+        try (SqlConnection server = new SqlConnection()) {
 
-      Connection conn = server.connect();
+            Connection conn = server.connect();
 
-      for (var test : sql)
-        conn.prepareStatement(test).execute();
+            for (var test : sql)
+                conn.prepareStatement(test).execute();
 
-    } catch (Exception e) {
-      e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-  }
+
 }
