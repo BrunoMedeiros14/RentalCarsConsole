@@ -3,7 +3,7 @@ package utils;
 public class MenuTreatment {
 
     public static Integer itemsTreatment(Integer totalMenuItems) {
-        Integer n = 0;
+        int n = 0;
 
         while (true) {
             try {
@@ -25,7 +25,7 @@ public class MenuTreatment {
     }
 
     public static Integer idTreatment() {
-        Integer n = 0;
+        int n = 0;
 
         while (true) {
             try {

@@ -9,22 +9,23 @@ public class Finals {
     public static final String HOME_MENU = """
             Welcome to the Medeiros Car station!
             What do you want to do?
-            1 - Consult
-            2 - Register
-            3 - Update
-            4 - Delete
-            Dev (5 - Seed Sqlite Data)
-            0 - Exit""";
+            [1] - Consult
+            [2] - Register
+            [3] - Update
+            [4] - Delete
+            [0] - Exit
+            Dev ([5] - Seed Sqlite Data)""";
     public static final String ACTION_MENU = """
-            You want to do this with:
-            1 - Car
-            2 - Owner
-            0 - Return""";
+            You want %s:
+            [1] - Car
+            [2] - Owner
+            [0] - Return""";
     public static final String TYPE_MENU = """
             You want to do this by:
-            1 - ID
-            2 - Get all
-            0 - Return""";
+            [1] - ID
+            [2] - Get all
+            [0] - Return""";
+
     // Regular Colors
     public static final String BLACK = "\033[0;30m"; // BLACK
     public static final String RED = "\033[0;31m"; // RED
@@ -34,6 +35,7 @@ public class Finals {
     public static final String PURPLE = "\033[0;35m"; // PURPLE
     public static final String CYAN = "\033[0;36m"; // CYAN
     public static final String WHITE = "\033[0;37m"; // WHITE
+
     // Bold
     public static final String BLACK_BOLD = "\033[1;30m"; // BLACK
     public static final String RED_BOLD = "\033[1;31m"; // RED

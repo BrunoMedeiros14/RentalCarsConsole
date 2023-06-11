@@ -12,28 +12,26 @@ public class Menu {
             System.out.println(Finals.CLEAN + Finals.HOME_MENU);
             action = MenuTreatment.itemsTreatment(5);
 
-            Read actionMenu = new Read();
+            ActionCar actionMenu = new ActionCar();
 
             switch (action) {
-                case 1:
+                case 1 -> {
                     actionMenu.setCrud("read");
                     actionMenu.readItems();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     actionMenu.setCrud("create");
                     actionMenu.readItems();
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     actionMenu.setCrud("update");
                     actionMenu.readItems();
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     actionMenu.setCrud("delete");
                     actionMenu.readItems();
-                    break;
-                case 5:
-                    SqliteSeed.seedSqlite();
-                    break;
+                }
+                case 5 -> SqliteSeed.seedSqlite();
             }
         }
     }

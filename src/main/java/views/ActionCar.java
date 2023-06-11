@@ -5,7 +5,7 @@ import utils.MenuTreatment;
 
 import java.lang.reflect.Method;
 
-public class Read {
+public class ActionCar {
 
     private String crud;
     private Integer item = -1;
@@ -13,9 +13,9 @@ public class Read {
 
     public static Object methodByString(String methodToGet) {
         try {
-            Read readMenu = new Read();
+            ActionCar readMenu = new ActionCar();
 
-            Method method = Read.class.getMethod(methodToGet);
+            Method method = ActionCar.class.getMethod(methodToGet);
 
             return method.invoke(readMenu);
         } catch (Exception e) {
@@ -33,16 +33,17 @@ public class Read {
             System.out.println(Finals.CLEAN + Finals.TYPE_MENU);
             search = MenuTreatment.itemsTreatment(2);
             switch (search) {
-                case 1:
+                case 1 -> {
                     readItemsById();
                     item = 0;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     readAllItems();
                     item = 0;
-                    break;
-                case 0:
+                }
+                case 0 -> {
                     continue;
+                }
             }
         }
     }
