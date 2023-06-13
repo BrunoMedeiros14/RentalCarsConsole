@@ -1,13 +1,13 @@
 package views.action;
 
-abstract public interface Crud {
+public interface Crud {
 
-    abstract public void read();
+    void read();
 
-    abstract public void save();
+    void save();
 
-    abstract public void update();
+    void update();
 
-    abstract public void delete();
+    void delete();
 
 }

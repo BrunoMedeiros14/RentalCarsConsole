@@ -6,6 +6,10 @@ public class Finals {
 
     public static final String CLEAN = "\033[H\033[2J";
     public static final String RESET = "\u001B[0m";
+    public static final String[] POSSIBLE_ACTIONS = {"exit", "read", "save", "update", "delete"};
+
+    public static final String[] TRUES = {"sim", "yes", "true", "1"};
+
     public static final String HOME_MENU = """
             Welcome to the Medeiros Car station!
             What do you want to do?
@@ -21,7 +25,7 @@ public class Finals {
             [2] - Owner
             [0] - Return""";
     public static final String TYPE_MENU = """
-            You want to do this by:
+            You want %s %s:
             [1] - ID
             [2] - Get all
             [0] - Return""";
@@ -46,5 +50,11 @@ public class Finals {
     public static final String CYAN_BOLD = "\033[1;36m"; // CYAN
     public static final String WHITE_BOLD = "\033[1;37m"; // WHITE
     public static Scanner scan = new Scanner(System.in);
+
+    public static void printSuccess(String text) {
+        System.out.println(CLEAN + GREEN_BOLD + text + RESET);
+        System.out.println("Press any key to continue.");
+        scan.nextLine();
+    }
 
 }
