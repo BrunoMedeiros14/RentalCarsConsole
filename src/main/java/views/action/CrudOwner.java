@@ -1,6 +1,5 @@
 package views.action;
 
-import dao.OwnerDAO;
 import entities.Owner;
 import enums.Gender;
 import utils.Finals;
@@ -8,10 +7,9 @@ import utils.MenuTreatment;
 
 import java.util.Set;
 
-public class CrudOwner implements Crud {
+public class CrudOwner extends Crud {
 
     private final String MAIN_ITEM = "owner";
-    private final OwnerDAO ownerDAO = new OwnerDAO();
 
     @Override
     public void read() {
@@ -88,23 +86,4 @@ public class CrudOwner implements Crud {
 
         if (ownerDAO.deleteOwner(owner.getOwnerId()) == 1) Finals.printSuccess("Successfully delete.");
     }
-
-    private Owner ownerConfirmationById(String action) {
-        Owner owner;
-
-        while (true) {
-            System.out.println("What is the owner id?");
-            int id = MenuTreatment.integerTreatment();
-            owner = ownerDAO.getOwnerById(id);
-            if (owner.getName() == null) {
-                System.out.println("Owner does not exist.");
-                continue;
-            }
-
-            System.out.println("this owner you want to " + action + "?\n" + owner);
-            boolean permission = MenuTreatment.booleanTreatment();
-            if (permission) return owner;
-        }
-    }
-
 }

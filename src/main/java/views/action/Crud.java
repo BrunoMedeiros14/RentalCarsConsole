@@ -1,13 +1,37 @@
 package views.action;
 
-public interface Crud {
+import dao.OwnerDAO;
+import entities.Owner;
+import utils.MenuTreatment;
 
-    void read();
+abstract public class Crud {
 
-    void save();
+    protected OwnerDAO ownerDAO = new OwnerDAO();
 
-    void update();
+    public abstract void read();
 
-    void delete();
+    public abstract void save();
+
+    public abstract void update();
+
+    public abstract void delete();
+
+    protected Owner ownerConfirmationById(String action) {
+        Owner owner;
+
+        while (true) {
+            System.out.println("What is the owner id?");
+            int id = MenuTreatment.integerTreatment();
+            owner = ownerDAO.getOwnerById(id);
+            if (owner.getName() == null) {
+                System.out.println("Owner does not exist.");
+                continue;
+            }
+
+            System.out.println("this owner you want to " + action + "?\n" + owner);
+            boolean permission = MenuTreatment.booleanTreatment();
+            if (permission) return owner;
+        }
+    }
 
 }
