@@ -71,7 +71,7 @@ public class SqliteSeed {
             Connection conn = server.connect();
 
             for (var test : sql)
-                conn.prepareStatement(test).execute();
+                conn.prepareStatement(test).executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

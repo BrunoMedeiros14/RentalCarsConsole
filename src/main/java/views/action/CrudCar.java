@@ -39,7 +39,7 @@ public class CrudCar extends Crud {
         Set<Car> cars = carDAO.getAllCars();
         cars.forEach(car -> {
 
-            System.out.println(car.getBrand() + ":");
+            System.out.printf("%s [%s]:\n   ", car.getBrand(), car.getCarId());
             System.out.printf("Owner: %s - year: %s - color: %s - price: %.2f - factory: %s\n",
                               car.getOwner().getName(), car.getYear(), car.getColor(), car.getPrice(),
                               car.getFactoryName()
@@ -68,17 +68,64 @@ public class CrudCar extends Crud {
         Integer insertCar = carDAO.createCar(car);
 
         if (insertCar > 0) Finals.printSuccess(car + "\n inserido no banco de dados com sucesso.");
-
     }
 
     @Override
     public void update() {
+        Car car = carConfirmationById("update");
 
+        System.out.println("Do you want to update the brand?");
+        if (MenuTreatment.booleanTreatment()) {
+            System.out.println("Insert new car brand:");
+            car.setBrand(MenuTreatment.brandTreatment());
+        }
+        System.out.println("Do you want to update the year?");
+        if (MenuTreatment.booleanTreatment()) {
+            System.out.println("Insert the new year:");
+            car.setYear(MenuTreatment.integerTreatment());
+        }
+        System.out.println("Do you want to update the color?");
+        if (MenuTreatment.booleanTreatment()) {
+            System.out.println("Insert new car color:");
+            car.setColor(MenuTreatment.colorTreatment());
+        }
+        System.out.println("Do you want to update the price?");
+        if (MenuTreatment.booleanTreatment()) {
+            System.out.println("Insert new price:");
+            car.setPrice(MenuTreatment.doubleTreatment());
+        }
+        System.out.println("Do you want to update the factory?");
+        if (MenuTreatment.booleanTreatment()) {
+            System.out.println("Insert new factory name:");
+            car.setFactoryName(MenuTreatment.nameTreatment());
+        }
+
+        if (carDAO.updateCar(car) == 1) Finals.printSuccess("Successfully update.");
     }
 
     @Override
     public void delete() {
+        Car car = carConfirmationById("delete");
 
+        if (carDAO.deleteCar(car.getCarId()) == 1) Finals.printSuccess("Successfully delete.");
+    }
+
+    protected Car carConfirmationById(String action) {
+        Car car;
+
+        while (true) {
+            System.out.println("What is id car?");
+            int id = MenuTreatment.integerTreatment();
+            car = carDAO.getCarById(id);
+            if (car.getBrand() == null) {
+                System.out.println("Car does not exist.");
+                continue;
+            }
+
+            System.out.println("this car you want to " + action + "?\n" + car);
+            boolean permission = MenuTreatment.booleanTreatment();
+            if (permission) return car;
+        }
     }
 
 }

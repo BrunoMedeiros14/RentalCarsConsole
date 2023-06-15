@@ -35,10 +35,8 @@ public class Menu {
 
     private void getAction(String text) {
 
-        int item = -1;
-
         System.out.printf(Finals.CLEAN + Finals.ACTION_MENU + "\n", text);
-        item = MenuTreatment.itemsTreatment(2);
+        int item = MenuTreatment.itemsTreatment(2);
 
         switch (item) {
             case 2 -> actionMenu = new CrudOwner();
