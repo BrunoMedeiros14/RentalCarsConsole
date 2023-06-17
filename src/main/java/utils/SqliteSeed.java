@@ -26,6 +26,13 @@ public class SqliteSeed {
               REFERENCES tbl_owner (pk_owner_id) ON DELETE RESTRICT
             );
             """, """
+            CREATE TABLE tbl_phone (
+                pk_phone_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                ddd         TEXT    NOT NULL,
+                number      TEXT    NOT NULL,
+                fk_owner_id INTEGER REFERENCES tbl_owner (pk_owner_id) NOT NULL
+            );
+            """, """
             INSERT INTO `tbl_owner` (`pk_owner_id`, `name`, `cpf`, `age`, `gender`) VALUES
             (1, 'John Doe', '12345678901', 30, 'Male'),
             (2, 'Jane Smith', '23456789012', 25, 'Female'),

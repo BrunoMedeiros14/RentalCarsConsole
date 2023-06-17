@@ -2,6 +2,8 @@ package entities;
 
 import enums.Gender;
 
+import java.util.Set;
+
 public class Owner {
 
     private int ownerId;
@@ -9,6 +11,7 @@ public class Owner {
     private int age;
     private String cpf;
     private Gender gender;
+    private Set<PhoneNumber> phoneNumbers;
 
     public Owner() {
     }
@@ -60,6 +63,14 @@ public class Owner {
         this.gender = gender;
     }
 
+    public Set<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -74,13 +85,12 @@ public class Owner {
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         Owner other = (Owner) obj;
-        if (ownerId != other.ownerId) return false;
-        return true;
+        return ownerId == other.ownerId;
     }
 
     @Override
     public String toString() {
-        return ("Owner [ownerId=" + ownerId + ", name=" + name + ", age=" + age + ", cpf=" + cpf + ", gender=" + gender + "]");
+        return ("Owner {ownerId=" + ownerId + ", name=" + name + ", age=" + age + ", cpf=" + cpf + ", gender=" + gender + ", numbers=" + phoneNumbers + "}");
     }
 
 }
