@@ -48,8 +48,8 @@ public class CarDAO {
             while (resultSet.next()) {
                 Integer ownerId = resultSet.getInt("fk_key_owner_id");
                 car.setCarId(id);
-                car.setBrand(Brand.fromValue(resultSet.getString("brand")));
-                car.setColor(Color.fromValue(resultSet.getString("color")));
+                car.setBrand(Brand.toEnum(resultSet.getString("brand")));
+                car.setColor(Color.toEnum(resultSet.getString("color")));
                 car.setFactoryName(resultSet.getString("factory_name"));
                 car.setOwner(new OwnerDAO().getOwnerById(ownerId));
                 car.setPrice(resultSet.getDouble("price"));
@@ -75,9 +75,9 @@ public class CarDAO {
             while (resultSet.next()) {
                 Integer ownerId = resultSet.getInt("fk_key_owner_id");
                 Car car = new Car();
-                car.setBrand(Brand.fromValue(resultSet.getString("brand")));
+                car.setBrand(Brand.toEnum(resultSet.getString("brand")));
                 car.setCarId(resultSet.getInt("pk_car_id"));
-                car.setColor(Color.fromValue(resultSet.getString("color")));
+                car.setColor(Color.toEnum(resultSet.getString("color")));
                 car.setFactoryName(resultSet.getString("factory_name"));
                 car.setPrice(resultSet.getDouble("price"));
                 car.setYear(resultSet.getInt("manufacture_year"));

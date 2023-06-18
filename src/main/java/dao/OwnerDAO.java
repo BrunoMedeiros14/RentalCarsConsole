@@ -45,7 +45,7 @@ public class OwnerDAO {
             while (resultSet.next()) {
                 owner.setAge(resultSet.getInt("age"));
                 owner.setCpf(resultSet.getString("cpf"));
-                owner.setGender(Gender.fromValue(resultSet.getString("gender")));
+                owner.setGender(Gender.toEnum(resultSet.getString("gender")));
                 owner.setName(resultSet.getString("name"));
                 owner.setOwnerId(resultSet.getInt("pk_owner_id"));
             }
@@ -69,7 +69,7 @@ public class OwnerDAO {
                 Owner owner = new Owner();
                 owner.setAge(resultSet.getInt("age"));
                 owner.setCpf(resultSet.getString("cpf"));
-                owner.setGender(Gender.fromValue(resultSet.getString("gender")));
+                owner.setGender(Gender.toEnum(resultSet.getString("gender")));
                 owner.setName(resultSet.getString("name"));
                 owner.setOwnerId(resultSet.getInt("pk_owner_id"));
 
