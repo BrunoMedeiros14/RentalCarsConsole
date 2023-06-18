@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class CrudOwner extends Crud {
 
-    private final String MAIN_ITEM = "owner";
+    private static final String MAIN_ITEM = "owner";
 
     @Override
     public void read() {
@@ -18,8 +18,7 @@ public class CrudOwner extends Crud {
         switch (action) {
             case 1 -> readById();
             case 2 -> readAll();
-            default -> {
-            }
+            default -> System.out.println("Voltando para o menu.");
         }
     }
 
@@ -34,7 +33,7 @@ public class CrudOwner extends Crud {
         Set<Owner> owners = ownerDAO.getAllOwners();
         owners.forEach(owner -> {
             System.out.println(owner.getName() + ":");
-            System.out.printf("Id: %s - age: %s - CPF: %s - gender: %s\n", owner.getOwnerId(), owner.getAge(),
+            System.out.printf("Id: %s - age: %s - CPF: %s - gender: %s%n", owner.getOwnerId(), owner.getAge(),
                               owner.getCpf(), owner.getGender()
             );
         });

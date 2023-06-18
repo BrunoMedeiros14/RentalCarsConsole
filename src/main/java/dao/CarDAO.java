@@ -74,17 +74,15 @@ public class CarDAO {
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
                 Integer ownerId = resultSet.getInt("fk_key_owner_id");
-                Car car = new Car() {
-                    {
-                        setBrand(Brand.fromValue(resultSet.getString("brand")));
-                        setCarId(resultSet.getInt("pk_car_id"));
-                        setColor(Color.fromValue(resultSet.getString("color")));
-                        setFactoryName(resultSet.getString("factory_name"));
-                        setPrice(resultSet.getDouble("price"));
-                        setYear(resultSet.getInt("manufacture_year"));
-                        setOwner(new OwnerDAO().getOwnerById(ownerId));
-                    }
-                };
+                Car car = new Car();
+                car.setBrand(Brand.fromValue(resultSet.getString("brand")));
+                car.setCarId(resultSet.getInt("pk_car_id"));
+                car.setColor(Color.fromValue(resultSet.getString("color")));
+                car.setFactoryName(resultSet.getString("factory_name"));
+                car.setPrice(resultSet.getDouble("price"));
+                car.setYear(resultSet.getInt("manufacture_year"));
+                car.setOwner(new OwnerDAO().getOwnerById(ownerId));
+
                 cars.add(car);
             }
         } catch (Exception e) {
@@ -123,9 +121,7 @@ public class CarDAO {
     }
 
     public Integer deleteCar(Integer id) {
-        String sql = """
-                DELETE FROM tbl_car WHERE pk_car_id = ?
-                """;
+        String sql = "DELETE FROM tbl_car WHERE pk_car_id = ?";
 
         try (SqlConnection conn = new SqlConnection()) {
             PreparedStatement stm = conn.connect().prepareStatement(sql);

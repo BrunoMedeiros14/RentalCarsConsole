@@ -66,15 +66,13 @@ public class OwnerDAO {
             PreparedStatement stm = conn.connect().prepareStatement(sql);
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
-                Owner owner = new Owner() {
-                    {
-                        setAge(resultSet.getInt("age"));
-                        setCpf(resultSet.getString("cpf"));
-                        setGender(Gender.fromValue(resultSet.getString("gender")));
-                        setName(resultSet.getString("name"));
-                        setOwnerId(resultSet.getInt("pk_owner_id"));
-                    }
-                };
+                Owner owner = new Owner();
+                owner.setAge(resultSet.getInt("age"));
+                owner.setCpf(resultSet.getString("cpf"));
+                owner.setGender(Gender.fromValue(resultSet.getString("gender")));
+                owner.setName(resultSet.getString("name"));
+                owner.setOwnerId(resultSet.getInt("pk_owner_id"));
+
                 owners.add(owner);
             }
         } catch (Exception e) {
@@ -109,8 +107,7 @@ public class OwnerDAO {
     }
 
     public Integer deleteOwner(Integer id) {
-        String sql = """
-                DELETE FROM tbl_owner WHERE pk_owner_id = ?""";
+        String sql = "DELETE FROM tbl_owner WHERE pk_owner_id = ?";
 
         try (SqlConnection conn = new SqlConnection()) {
             PreparedStatement stm = conn.connect().prepareStatement(sql);

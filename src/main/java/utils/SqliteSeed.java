@@ -4,6 +4,9 @@ import java.sql.Connection;
 
 public class SqliteSeed {
 
+    private SqliteSeed() {
+    }
+
     public static void seedSqlite() {
         String[] sql = {"""
             CREATE TABLE IF NOT EXISTS tbl_owner (
@@ -83,6 +86,7 @@ public class SqliteSeed {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 }

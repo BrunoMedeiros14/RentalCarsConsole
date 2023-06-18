@@ -41,12 +41,10 @@ public class PhoneNumberDAO {
             PreparedStatement stm = conn.connect().prepareStatement(sql);
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
-                PhoneNumber phoneNumber = new PhoneNumber() {
-                    {
-                        setDdd(resultSet.getString("ddd"));
-                        setNumber(resultSet.getString("number"));
-                    }
-                };
+                PhoneNumber phoneNumber = new PhoneNumber();
+                phoneNumber.setDdd(resultSet.getString("ddd"));
+                phoneNumber.setNumber(resultSet.getString("number"));
+
                 phoneNumbers.add(phoneNumber);
             }
         } catch (Exception e) {

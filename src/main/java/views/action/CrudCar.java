@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class CrudCar extends Crud {
 
-    private final String MAIN_ITEM = "car";
+    private static final String MAIN_ITEM = "car";
     private final CarDAO carDAO = new CarDAO();
 
     @Override
@@ -23,8 +23,8 @@ public class CrudCar extends Crud {
         switch (action) {
             case 1 -> readById();
             case 2 -> readAll();
-            default -> {
-            }
+            default -> System.out.println("Voltando para o menu anterior.");
+
         }
     }
 
@@ -39,8 +39,8 @@ public class CrudCar extends Crud {
         Set<Car> cars = carDAO.getAllCars();
         cars.forEach(car -> {
 
-            System.out.printf("%s [%s]:\n   ", car.getBrand(), car.getCarId());
-            System.out.printf("Owner: %s - year: %s - color: %s - price: %.2f - factory: %s\n",
+            System.out.printf("%s [%s]:%n   ", car.getBrand(), car.getCarId());
+            System.out.printf("Owner: %s - year: %s - color: %s - price: %.2f - factory: %s%n",
                               car.getOwner().getName(), car.getYear(), car.getColor(), car.getPrice(),
                               car.getFactoryName()
             );

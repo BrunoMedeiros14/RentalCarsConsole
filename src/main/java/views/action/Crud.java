@@ -4,7 +4,7 @@ import dao.OwnerDAO;
 import entities.Owner;
 import utils.MenuTreatment;
 
-abstract public class Crud {
+public abstract class Crud {
 
     protected OwnerDAO ownerDAO = new OwnerDAO();
 

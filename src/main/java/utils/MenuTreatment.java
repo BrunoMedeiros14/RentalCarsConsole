@@ -8,23 +8,23 @@ import java.util.Arrays;
 
 public class MenuTreatment {
 
+    private MenuTreatment() {
+    }
+
     public static Integer itemsTreatment(Integer totalMenuItems) {
         int n;
 
         while (true) {
             try {
+
                 n = Integer.parseInt(Finals.scan.next());
+                if (n > 0 || n < totalMenuItems) break;
+
+                System.out.println("Enter a code between 0 and " + totalMenuItems);
+
             } catch (NumberFormatException e) {
                 System.out.println("Enter only integers");
-                continue;
             }
-
-            if (n < 0 || n > totalMenuItems) {
-                System.out.println("Enter a code between 0 and " + totalMenuItems);
-                continue;
-            }
-
-            break;
         }
 
         return n;
@@ -50,17 +50,13 @@ public class MenuTreatment {
         while (true) {
             try {
                 n = Integer.parseInt(Finals.scan.nextLine());
+                if (n >= 0) break;
+
+                System.out.println("Enter a valid id.");
+
             } catch (NumberFormatException e) {
                 System.out.println("Enter only integers");
-                continue;
             }
-
-            if (n <= 0) {
-                System.out.println("Enter a valid id.");
-                continue;
-            }
-
-            break;
         }
 
         return n;
@@ -72,17 +68,13 @@ public class MenuTreatment {
         while (true) {
             try {
                 n = Double.parseDouble(Finals.scan.nextLine());
+                if (n >= 0) break;
+
+                System.out.println("Enter a valid price.");
+
             } catch (NumberFormatException e) {
                 System.out.println("Enter only number, value.");
-                continue;
             }
-
-            if (n <= 0) {
-                System.out.println("Enter a valid price.");
-                continue;
-            }
-
-            break;
         }
 
         return n;

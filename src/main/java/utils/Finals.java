@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Finals {
 
+    public static final Scanner scan = new Scanner(System.in);
+
     public static final String CLEAN = "\033[H\033[2J";
     public static final String RESET = "\u001B[0m";
     public static final String[] POSSIBLE_ACTIONS = {"exit", "read", "save", "update", "delete"};
@@ -49,7 +51,8 @@ public class Finals {
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
     public static final String CYAN_BOLD = "\033[1;36m"; // CYAN
     public static final String WHITE_BOLD = "\033[1;37m"; // WHITE
-    public static Scanner scan = new Scanner(System.in);
+    private Finals() {
+    }
 
     public static void printSuccess(String text) {
         System.out.println(CLEAN + GREEN_BOLD + text + RESET);

@@ -14,9 +14,6 @@ public class SqlConnection implements AutoCloseable {
 
     private Connection conn;
 
-    public SqlConnection() {
-    }
-
     public Connection connect() throws SQLException {
         if (LITE) conn = DriverManager.getConnection(URL_LITE);
         else conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
