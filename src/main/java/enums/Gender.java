@@ -25,7 +25,7 @@ public enum Gender {
         if (value == null) return null;
 
         for (Gender gender : Gender.values()) {
-            if (gender.toString().equals(value)) return gender;
+            if (value.equals(gender.getDescription())) return gender;
         }
 
         throw new IllegalArgumentException("Invalid status value: " + value);

@@ -30,7 +30,7 @@ public enum Brand {
         if (value == null) return null;
 
         for (Brand brand : Brand.values()) {
-            if (brand.toString().equals(value)) return brand;
+            if (value.equals(brand.getDescription())) return brand;
         }
 
         throw new IllegalArgumentException("Invalid status value: " + value);

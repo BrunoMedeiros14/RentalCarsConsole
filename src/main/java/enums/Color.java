@@ -26,7 +26,7 @@ public enum Color {
         if (value == null) return null;
 
         for (Color color : Color.values()) {
-            if (color.toString().equals(value)) return color;
+            if (value.equals(color.getDescription())) return color;
         }
 
         throw new IllegalArgumentException("Invalid status value: " + value);
